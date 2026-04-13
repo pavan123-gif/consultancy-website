@@ -4,7 +4,14 @@
 <h2>Job Clients</h2>
 
 <form method="GET" class="mb-3">
-    <input type="text" name="search" placeholder="Search..." class="form-control">
+    <input type="text" name="search" placeholder="Search..." class="form-control mb-2">
+
+    <select name="filter" class="form-control">
+        <option value="">All</option>
+        <option value="shortlisted">Shortlisted</option>
+    </select>
+
+    <button class="btn btn-primary mt-2">Apply</button>
 </form>
 
 <table class="table table-bordered">
@@ -29,29 +36,29 @@
         <td>{{ client.qualification }}</td>
         <td>{{ client.skills }}</td>
         <td>{{ client.experience }}</td>
-        <td>{{ client.status }}</td>
+    <td>
+    {{ client.status }}
+    {% if client.shortlisted %}
+        <span class="badge bg-warning">Shortlisted</span>
+    {% endif %}
+</td>
 <td>
     <!-- WhatsApp -->
-    <a href="https://wa.me/{{ client.phone }}?text=Hi {{ client.name }}, we have a job opportunity for you."
+    <a href="https://wa.me/{{ client.phone }}?text=Hi {{ client.name }}, we found a job matching your {{ client.skills }} skills."
        target="_blank"
-       class="btn btn-success btn-sm">
-       WhatsApp
-    </a>
+       class="btn btn-success btn-sm">WhatsApp</a>
+
+    <!-- Call -->
+    <a href="tel:{{ client.phone }}" class="btn btn-info btn-sm">Call</a>
 
     <!-- Update -->
-    <a href="/admin/update_job_status/{{ client._id }}" class="btn btn-primary btn-sm">
-        Update
-    </a>
+    <a href="/admin/update_job_status/{{ client._id }}" class="btn btn-primary btn-sm">Update</a>
 
     <!-- Delete -->
-    <a href="/admin/delete_job_client/{{ client._id }}" class="btn btn-danger btn-sm">
-        Delete
-    </a>
+    <a href="/admin/delete_job_client/{{ client._id }}" class="btn btn-danger btn-sm">Delete</a>
 
     <!-- Shortlist -->
-    <a href="/admin/shortlist/{{ client._id }}" class="btn btn-warning btn-sm">
-        ⭐ Shortlist
-    </a>
+    <a href="/admin/shortlist/{{ client._id }}" class="btn btn-warning btn-sm">⭐</a>
 </td>
        
     </tr>
