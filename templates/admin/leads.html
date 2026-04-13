@@ -1,0 +1,30 @@
+<h2>Leads</h2>
+
+<table border="1">
+<tr>
+    <th>Name</th>
+    <th>Phone</th>
+    <th>WhatsApp</th>
+    <th>Service</th>
+    <th>Requirement</th>
+    <th>Source</th>
+    <th>Status</th>
+    <th>Action</th>
+</tr>
+
+{% for lead in leads %}
+<tr>
+    <td>{{ lead.name }}</td>
+    <td>{{ lead.phone }}</td>
+    <td>{{ lead.whatsapp }}</td>
+    <td>{{ lead.service }}</td>
+    <td>{{ lead.requirement }}</td>
+    <td>{{ lead.source_page }}</td>
+    <td>{{ lead.status }}</td>
+    <td>
+        <a href="https://wa.me/91{{ lead.whatsapp }}">WhatsApp</a>
+    </td>
+</tr>
+{% endfor %}
+
+</table>

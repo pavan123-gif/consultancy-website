@@ -1,0 +1,30 @@
+<form method="POST" action="/add-lead">
+    
+    <input type="text" name="name" placeholder="Enter Name" required><br><br>
+
+    <input type="text" name="phone" placeholder="Enter Mobile Number" required><br><br>
+
+    <input type="text" name="whatsapp" placeholder="Enter WhatsApp Number" required><br><br>
+
+    <select name="service" required>
+        <option value="">Select Service</option>
+        <option value="Jobs">Jobs</option>
+        <option value="Overseas Jobs">Overseas Jobs</option>
+        <option value="Catering">Catering</option>
+        <option value="Corporate Gifting">Corporate Gifting</option>
+        <option value="Event Organizing">Event Organizing</option>
+        <option value="Photo Shoots">Photo Shoots</option>
+        <option value="Tutoring">Tutoring</option>
+        <option value="Overseas Education">Overseas Education</option>
+        <option value="Civil Construction">Civil Construction</option>
+        <option value="Electrical Material">Electrical Material</option>
+        <option value="Others">Others</option>
+    </select><br><br>
+
+    <textarea name="requirement" placeholder="Tell us your requirement" required></textarea><br><br>
+
+    <!-- Hidden field for tracking page -->
+    <input type="hidden" name="source_page" value="{{ source_page }}">
+
+    <button type="submit">Submit</button>
+</form>

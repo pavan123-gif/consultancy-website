@@ -1,0 +1,98 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+<h2>Clients</h2>
+
+<!-- ➕ Add Client Form -->
+<form method="POST" action="/admin/add_client" class="row g-2 mb-4">
+
+    <div class="col-md-2">
+        <input type="text" name="name" placeholder="Name" class="form-control" required>
+    </div>
+
+    <div class="col-md-2">
+        <input type="text" name="phone" placeholder="Phone" class="form-control" required>
+    </div>
+
+    <div class="col-md-2">
+        <select name="service_id" class="form-control">
+            {% for s in services %}
+            <option value="{{ s._id }}">{{ s.service_name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+
+    <div class="col-md-3">
+        <input type="text" name="requirement" placeholder="Requirement" class="form-control">
+    </div>
+
+    <div class="col-md-2">
+        <button class="btn btn-primary w-100">Add</button>
+    </div>
+
+</form>
+
+<h5 class="mb-3">Client List</h5>
+
+<table class="table table-bordered table-hover">
+
+    <tr>
+        <th>Name</th>
+        <th>Phone</th>
+        <th>Service</th>
+        <th>Requirement</th>
+        <th>Status</th>
+        <th>Action</th>
+    </tr>
+
+    {% for client in clients %}
+    <tr>
+        <td>{{ client.name }}</td>
+        <td>{{ client.phone }}</td>
+        <td>{{ client.service_name }}</td>
+        <td>{{ client.requirement }}</td>
+
+        <td>
+            {% if client.status == "Completed" %}
+                <a href="/admin/update_status/{{ client._id }}" 
+                   class="badge bg-success text-decoration-none">
+                   Completed
+                </a>
+            {% else %}
+                <a href="/admin/update_status/{{ client._id }}" 
+                   class="badge bg-warning text-dark text-decoration-none">
+                   Pending
+                </a>
+            {% endif %}
+        </td>
+
+        <td>
+            <a href="/admin/update_status/{{ client._id }}" 
+               class="btn btn-success btn-sm me-2">Update</a>
+
+            <a href="/admin/delete_client/{{ client._id }}" 
+               class="btn btn-danger btn-sm me-2">Delete</a>
+
+            <a href="https://wa.me/{{ client.phone | replace('-', '') }}?text=Hello {{ client.name }}, regarding your {{ client.service_name }} requirement"
+               target="_blank"
+               class="btn btn-success btn-sm">
+               WhatsApp
+            </a>
+            <a href="{{ url_for('client_form', id=client._id) }}" class="btn btn-warning">
+    Edit
+</a>
+            <a href="/admin/edit_client/{{ client._id }}" 
+   class="btn btn-warning btn-sm me-2">
+   Edit
+
+</a>
+        </td>
+
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}
+

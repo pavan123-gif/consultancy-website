@@ -1,0 +1,36 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+<h2>Services</h2>
+
+<form method="POST" action="/admin/add_service" class="mb-4">
+    <div class="row">
+        <div class="col-md-6">
+            <input type="text" name="service_name" placeholder="Service Name" class="form-control" required>
+        </div>
+        <div class="col-md-2">
+            <button class="btn btn-primary w-100">Add Service</button>
+        </div>
+    </div>
+</form>
+
+<table class="table table-bordered table-hover">
+
+    <tr>
+        <th>Service Name</th>
+        <th>Action</th>
+    </tr>
+
+    {% for s in services %}
+    <tr>
+        <td>{{ s.service_name }}</td>
+        <td>
+            <a href="/admin/delete_service/{{ s._id }}" class="btn btn-danger btn-sm">Delete</a>
+        </td>
+    </tr>
+    {% endfor %}
+
+</table>
+
+{% endblock %}

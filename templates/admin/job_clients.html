@@ -1,0 +1,48 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+<h2>Job Clients</h2>
+
+<form method="GET" class="mb-3">
+    <input type="text" name="search" placeholder="Search..." class="form-control">
+</form>
+
+<table class="table table-bordered">
+
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Phone</th>
+            <th>Qualification</th>
+            <th>Skills</th>
+            <th>Experience</th>
+            <th>Status</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    {% for client in job_clients %}
+    <tr>
+        <td>{{ client.name }}</td>
+        <td>{{ client.phone }}</td>
+        <td>{{ client.qualification }}</td>
+        <td>{{ client.skills }}</td>
+        <td>{{ client.experience }}</td>
+        <td>{{ client.status }}</td>
+
+        <td>
+            <a href="/admin/update_job_status/{{ client._id }}" class="btn btn-success btn-sm">Update</a>
+
+            <a href="/admin/delete_job_client/{{ client._id }}" class="btn btn-danger btn-sm">Delete</a>
+
+            <a href="/admin/shortlist/{{ client._id }}" class="btn btn-warning btn-sm">
+                ⭐ Shortlist
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>
+{% endblock%}

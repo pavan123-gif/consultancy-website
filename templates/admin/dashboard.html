@@ -1,0 +1,79 @@
+{% extends "admin/base.html" %}
+
+{% block content %}
+
+<h2>Dashboard</h2>
+
+<div class="row mt-4">
+
+    <div class="col-md-3">
+        <div class="card shadow text-center p-3">
+            <h6>Clients</h6>
+            <h2>{{ clients }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center p-3">
+            <h6>Services</h6>
+            <h2>{{ services }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center p-3">
+            <h6>Leads</h6>
+            <h2>{{ leads }}</h2>
+        </div>
+    </div>
+
+    <div class="col-md-3">
+        <div class="card shadow text-center p-3">
+            <h6>Job Clients</h6>
+            <h2>{{ job_clients }}</h2>
+        </div>
+    </div>
+
+</div>
+
+<div class="row mt-5">
+
+    <div class="col-md-6">
+        <div class="card p-3 shadow">
+            <h5 class="text-center">Clients Overview</h5>
+            <canvas id="clientsChart"></canvas>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card p-3 shadow">
+            <h5 class="text-center">Job Status</h5>
+            <canvas id="jobsChart"></canvas>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    const clientsChart = new Chart(document.getElementById('clientsChart'), {
+        type: 'bar',
+        data: {
+            labels: ['Clients', 'Services', 'Leads'],
+            datasets: [{
+                data: [{{ clients }}, {{ services }}, {{ leads }}]
+            }]
+        }
+    });
+
+    const jobsChart = new Chart(document.getElementById('jobsChart'), {
+        type: 'pie',
+        data: {
+            labels: ['Placed', 'New'],
+            datasets: [{
+                data: [{{ placed }}, {{ new_jobs }}]
+            }]
+        }
+    });
+</script>
+
+{% endblock %}

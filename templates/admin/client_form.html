@@ -1,0 +1,25 @@
+<h2>{{ 'Edit Client' if client else 'Add Client' }}</h2>
+
+<form method="POST">
+    <input type="text" name="name" placeholder="Name"
+           value="{{ client.name if client else '' }}" required><br>
+
+    <input type="text" name="phone" placeholder="Phone"
+           value="{{ client.phone if client else '' }}" required><br>
+
+    <select name="service_id">
+        {% for s in services %}
+        <option value="{{ s._id }}"
+        {% if client and client.service_id == s._id %}selected{% endif %}>
+            {{ s.service_name }}
+        </option>
+        {% endfor %}
+    </select><br>
+
+    <input type="text" name="requirement" placeholder="Requirement"
+           value="{{ client.requirement if client else '' }}"><br>
+
+    <button type="submit">
+        {{ 'Update' if client else 'Add' }}
+    </button>
+</form>
