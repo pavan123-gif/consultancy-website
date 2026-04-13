@@ -272,7 +272,7 @@ def upload_job_clients():
             for _, row in df.iterrows():
                 db.job_clients.insert_one({
                     "name": str(row.get('Full Name', '')),
-                    "phone": str(row.get('Mobile Number', '')),
+                    "phone": "91" + str(row.get('Mobile Number', '')),
                     "qualification": str(row.get('Qualification(s)', '')),
                     "skills": str(row.get('Are you a...?', '')),
                     "experience": str(row.get('Years of experience?', '')),

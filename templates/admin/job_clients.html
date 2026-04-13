@@ -30,16 +30,30 @@
         <td>{{ client.skills }}</td>
         <td>{{ client.experience }}</td>
         <td>{{ client.status }}</td>
+<td>
+    <!-- WhatsApp -->
+    <a href="https://wa.me/{{ client.phone }}?text=Hi {{ client.name }}, we have a job opportunity for you."
+       target="_blank"
+       class="btn btn-success btn-sm">
+       WhatsApp
+    </a>
 
-        <td>
-            <a href="/admin/update_job_status/{{ client._id }}" class="btn btn-success btn-sm">Update</a>
+    <!-- Update -->
+    <a href="/admin/update_job_status/{{ client._id }}" class="btn btn-primary btn-sm">
+        Update
+    </a>
 
-            <a href="/admin/delete_job_client/{{ client._id }}" class="btn btn-danger btn-sm">Delete</a>
+    <!-- Delete -->
+    <a href="/admin/delete_job_client/{{ client._id }}" class="btn btn-danger btn-sm">
+        Delete
+    </a>
 
-            <a href="/admin/shortlist/{{ client._id }}" class="btn btn-warning btn-sm">
-                ⭐ Shortlist
-            </a>
-        </td>
+    <!-- Shortlist -->
+    <a href="/admin/shortlist/{{ client._id }}" class="btn btn-warning btn-sm">
+        ⭐ Shortlist
+    </a>
+</td>
+       
     </tr>
     {% endfor %}
     </tbody>
